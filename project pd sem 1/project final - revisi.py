@@ -27,6 +27,7 @@ resize = photo.resize((130, 130))
 new_photo = ImageTk.PhotoImage(resize)
 
 # samsung
+# test
 # Window Utama
 
 
