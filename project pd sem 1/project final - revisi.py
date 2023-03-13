@@ -26,7 +26,7 @@ photo = Image.open("profile.png")
 resize = photo.resize((130, 130))
 new_photo = ImageTk.PhotoImage(resize)
 
-# pppp
+# samsung
 # Window Utama
 
 
