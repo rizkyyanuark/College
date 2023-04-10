@@ -150,9 +150,9 @@ class App():
         nim_entry = Entry(
             self.window, textvariable=self.nim, width=30, bd=2, font=self.font_entry, bg='#f1f1f2', fg='#011a27')
         nama_lengkap_entry = Entry(
-            self.window, textvariable=self.nama_lengkap, width=41, bd=2, font=self.font_entry, bg='#f1f1f2', fg='#011a27')
+            self.window, textvariable=self.nama_lengkap, width=40, bd=2, font=self.font_entry, bg='#f1f1f2', fg='#011a27')
         akun_entry = Entry(self.window, textvariable=self.akun,
-                           width=41, bd=2, font=self.font_entry, bg='#f1f1f2', fg='#011a27')
+                           width=40, bd=2, font=self.font_entry, bg='#f1f1f2', fg='#011a27')
         self.matakuliah_combobox = Combobox(
             self.window, values=self.mata_kuliah, font=self.font_entry, state='r', width=11, height=2)
         tombol_cari = Button(self.window, text="Find🔍", width=5, height=2, bd=2,
@@ -175,12 +175,12 @@ class App():
         akun_entry.place(x=185, y=170)
         self.matakuliah_combobox.place(x=185, y=220)
         self.matakuliah_combobox.set('select')
-        tombol_cari.place(x=484, y=63)
+        tombol_cari.place(x=530, y=63)
         tombol_submit.place(x=185, y=370)
         tombol_clear.place(x=394, y=370)
         tombol_camera.place(x=185, y=270)
-        tombol_pdf.place(x=550, y=250)
-        tombol_report.place(x=550, y=63)
+        tombol_pdf.place(x=540, y=265)
+        tombol_report.place(x=580, y=63)
 
 
 # mendapatakan adress dengan ip
