@@ -1,51 +1,22 @@
-import numpy as np
-from sklearn.neighbors import KNeighborsClassifier
-from tkinter import *
+import tkinter as tk
+from tkinter import ttk
 
-# Create the window
-window = Tk()
+root = tk.Tk()
+root.geometry("300x200")
 
-# Create the label
-label = Label(window, text="KNN Classification")
-label.pack()
+notebook = ttk.Notebook(root)
+notebook.pack(fill="both", expand=True)
 
-# Create the entry box for the number of neighbors
-entry_box = Entry(window)
-entry_box.pack()
+frame1 = ttk.Frame(notebook)
+frame2 = ttk.Frame(notebook)
 
-# Create the button to classify the data
-button = Button(window, text="Classify", command=classify)
-button.pack()
+notebook.add(frame1, text="Frame 1")
+notebook.add(frame2, text="Frame 2")
 
-# Create the canvas to display the data
-canvas = Canvas(window, width=600, height=400)
-canvas.pack()
+button1 = tk.Button(frame1, text="Button 1")
+button2 = tk.Button(frame1, text="Button 2")
 
-# Load the training data
-X_train = np.loadtxt("train.csv", delimiter=",")
-y_train = np.loadtxt("train_labels.csv", delimiter=",")
+button1.grid(row=0, column=0)
+button2.grid(row=0, column=1)
 
-# Create the KNN classifier
-clf = KNeighborsClassifier(n_neighbors=int(entry_box.get()))
-
-# Fit the classifier to the training data
-clf.fit(X_train, y_train)
-
-# Create a function to classify the data
-
-
-def classify():
-    # Get the data from the entry box
-    data = np.array([float(x) for x in entry_box.get().split(",")])
-
-    # Predict the label for the data
-    label = clf.predict([data])
-
-    # Draw the data on the canvas
-    canvas.create_oval(data[0] - 10, data[1] - 10,
-                       data[0] + 10, data[1] + 10, fill="red")
-    canvas.create_text(data[0], data[1], text=label)
-
-
-# Start the event loop
-window.mainloop()
+root.mainloop()
