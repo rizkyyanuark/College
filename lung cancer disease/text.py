@@ -84,15 +84,15 @@ def toggle_mode():
 root = tk.Tk()
 root.title("Lung Cancer Diasese")
 # root.geometry("950x700")
-# root.resizable(False, False)
+root.resizable(False, False)
 
 
 icon = ImageTk.PhotoImage(Image.open("Picture3.png"))
 root.iconphoto(False, icon)
 
 style = ttk.Style(root)
-root.tk.call("source", "forest-light.tcl")
 root.tk.call("source", "forest-dark.tcl")
+root.tk.call("source", "forest-light.tcl")
 style.theme_use("forest-dark")
 
 combo_list = ["Very Low", "Medium", "High"]
