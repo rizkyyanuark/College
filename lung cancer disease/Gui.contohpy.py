@@ -1,9 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-import pathlib
 import openpyxl
-from openpyxl import Workbook
-from openpyxl.styles import Font, Alignment, Border, Side
 from PIL import ImageTk, Image
 import pandas as pd
 import numpy as np
@@ -14,57 +11,6 @@ from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
 import matplotlib.pyplot as plt
-
-font = Font(bold=True)
-border = Border(left=Side(border_style='thin', color='00000000'),
-                right=Side(border_style='thin', color='00000000'),
-                top=Side(border_style='thin', color='00000000'),
-                bottom=Side(border_style='thin', color='00000000'))
-
-alignment = Alignment(horizontal='center', vertical='center')
-
-file = pathlib.Path('data.xlsx')
-if file.exists():
-    pass
-else:
-    file = Workbook()
-    sheet = file.active
-    sheet['a1'] = 'Hari'
-    a1 = sheet['a1']
-    a1.font = font
-    a1.border = border
-    a1.alignment = alignment
-    sheet['b1'] = 'Waktu'
-    b1 = sheet['b1']
-    b1.font = font
-    b1.border = border
-    b1.alignment = alignment
-    sheet['c1'] = 'Nama lengkap'
-    c1 = sheet['c1']
-    c1.font = font
-    c1.border = border
-    c1.alignment = alignment
-    sheet['d1'] = 'NIM'
-    d1 = sheet['d1']
-    d1.font = font
-    d1.border = border
-    d1.alignment = alignment
-    sheet['e1'] = 'Akun Unesa'
-    e1 = sheet['e1']
-    e1.font = font
-    e1.border = border
-    e1.alignment = alignment
-    sheet['f1'] = 'Mata Kuliah'
-    f1 = sheet['f1']
-    f1.font = font
-    f1.border = border
-    f1.alignment = alignment
-    sheet['g1'] = 'Lokasi '
-    g1 = sheet['g1']
-    g1.font = font
-    g1.border = border
-    g1.alignment = alignment
-    file.save('data.xlsx')
 
 
 def load_data():
@@ -82,9 +28,10 @@ def insert_row():
     subscription_status = status_combobox.get()
     employment_status = "Employed" if a.get() else "Unemployed"
 
+    print(name, age, subscription_status, employment_status)
 
 # Insert row into Excel sheet
-    path = file
+    path = "D:\codefirst.io\Tkinter Excel App\people.xlsx"
     workbook = openpyxl.load_workbook(path)
     sheet = workbook.active
     row_values = [name, age, subscription_status, employment_status]
@@ -150,14 +97,17 @@ def on_click(event):
 
 
 def bar():
-    import time
-    for i in range(1, 50, 1):
-        value = name_entry.get()
-        progress['value'] = len(value)
-        root.update_idletasks()
-        # lb.config(text=str(i)+"%")
-        time.sleep(0.03)
-    root.destroy()
+    progress = ttk.Progressbar(
+        root, orient="horizontal", length=200, mode="determinate")
+    progress.pack(pady=10)
+
+
+def start_progress():
+    progress["maximum"] = 100
+    for i in range(101):
+        progress["value"] = i   # update progressbar
+        progress.update()       # have to call update() in loop
+        progress["value"] = 0       # reset/clear progressbar
 
 
 root = tk.Tk()
@@ -405,13 +355,6 @@ progress = ttk.Progressbar(tab1, orient="horizontal",
 progress.pack(pady=50)
 
 
-def update_progress():
-    value = name_entry.get()  # Mendapatkan nilai dari entry
-    # Mengatur nilai progress bar berdasarkan panjang string
-    progress['value'] = len(value)
-    progress.update()  # Memperbarui tampilan progress bar
-
-
 def start():
     progress["value"] = 0
     progress["maximum"] = 100
@@ -422,6 +365,14 @@ def start():
 button = tk.Button(tab1, text="Start", command=bar)
 button.pack()
 
+
+# progress = tk.Progressbar(root, style="TProgressbar",
+#                        length=700, mode='determinate')
+# progress.pack(pady=10, padx=5)
+
+# btn = tk.Button(root, text='Start', command=bar)
+# btn.pack(pady=10)
+
 a = tk.BooleanVar()
 checkbutton = ttk.Checkbutton(
     biodata_row, text="Terms&Conditions", variable=a)
@@ -430,8 +381,11 @@ checkbutton.grid(row=6, column=0, padx=5, pady=5, sticky="nsew")
 # checkbutton = ttk.Checkbutton(biodata_row, text="Employed", variable=a)
 # checkbutton.grid(row=7, column=2, padx=10, pady=10, sticky="nsew")
 
-button = ttk.Button(biodata_row, text="Insert", command=insert_row)
-button.grid(row=8, column=0, padx=5, pady=5, sticky="nsew")
+# button = ttk.Button(biodata_row, text="Insert", command=insert_row)
+# button.grid(row=8, column=0, padx=5, pady=5, sticky="nsew")
+
+button = tk.Button(tab1, text="Start Progress", command=start_progress)
+button.pack(pady=10)
 
 separator = ttk.Separator(biodata_row)
 separator.grid(row=9, column=0, padx=(20, 10), pady=10, sticky="ew")
