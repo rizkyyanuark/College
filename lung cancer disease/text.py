@@ -12,23 +12,14 @@ from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
 import matplotlib.pyplot as plt
 
-s = pd.read_csv('cancer patient data sets.csv')
-s = s.values
-x = s[:, 2:25]
-y = s[:, 25]
-kf = KFold(n_splits=10, random_state=0, shuffle=True)
-print(kf)
 
-
-def load_data(csv='cancer patient data sets.csv'):
+def load_data():
     # Read the Excel file and create a DataFrame
-    df = pd.read_csv(csv)
-
-    list_values = list(df.values)
+    df = pd.read_csv("cancer patient data sets.csv")
     df["Gender"].replace({1: 'male', 2: 'Female'}, inplace=True)
-    for row in df.itertuples():
-        # Insert the current row into the Treeview widget
-        treeview.insert('', tk.END, values=row[2:5])
+    for index, row in df.iterrows():
+        treeview.insert("", "end", text=row["index"], values=(
+            row["Patient Id"], row['Age'], row["Gender"], row['Level']))
 
 
 def insert_row():
@@ -60,6 +51,13 @@ def insert_row():
 
 
 def knn():
+    s = pd.read_csv('cancer patient data sets.csv')
+    s = s.values
+    x = s[:, 2:25]
+    y = s[:, 25]
+    kf = KFold(n_splits=10, random_state=0, shuffle=True)
+    print(kf)
+
     neigh2 = KNeighborsClassifier(n_neighbors=2, metric='euclidean')
     neigh2.fit(x, y)
     l = neigh2.predict(
@@ -81,11 +79,27 @@ def toggle_mode():
         style.theme_use("forest-dark")
 
 
+def on_click(event):
+    item = treeview.item(treeview.focus())
+    popup = tk.Toplevel(root)
+    # popup.geometry("200x200")
+    label = tk.Label(popup, text=item["text"])
+    label.pack()
+    popup.update()
+    popup.minsize(root.winfo_width(), root.winfo_height())
+    x_cordinate = int((root.winfo_screenwidth()/2) - (root.winfo_width()/2))
+    y_cordinate = int((root.winfo_screenheight()/2) - (root.winfo_height()/2))
+    popup.geometry("+{}+{}".format(x_cordinate, y_cordinate))
+    for key in item:
+        if key != "text":
+            sub_label = tk.Label(popup, text=f"{key}: {item[key]}")
+            sub_label.pack()
+
+
 root = tk.Tk()
 root.title("Lung Cancer Diasese")
 # root.geometry("950x700")
 root.resizable(False, False)
-
 
 icon = ImageTk.PhotoImage(Image.open("Picture3.png"))
 root.iconphoto(False, icon)
@@ -109,10 +123,7 @@ combo_list8 = ["Very Low", "low", "Below Average", 'Average',
 combo_list7 = ["Very Low", "low", 'Average',
                'Above Average', 'High', 'Very High', "Maximum"]
 
-main_frame = ttk.Frame(root)
-main_frame.pack()
 
-notebook = ttk.Notebook(main_frame)
 notebook = ttk.Notebook(root)
 
 tab1 = ttk.Frame(notebook)
@@ -129,15 +140,21 @@ frame.pack()
 biodata_row = ttk.LabelFrame(frame, text="Biodata Row")
 biodata_row.grid(row=0, column=0, padx=20, pady=10)
 
-complaint_row = ttk.LabelFrame(frame, text="Medical Complaints Row")
+# test1 = ttk.LabelFrame(frame, text="Medical Complaints Row")
+# test1.grid(row=1, column=0, padx=20, pady=10)
+
+complaint_row = ttk.Notebook(frame)
 complaint_row.grid(row=1, column=0, padx=20, pady=10)
+test1 = ttk.Frame(complaint_row)
+test2 = ttk.Frame(complaint_row)
+test3 = ttk.Frame(complaint_row)
+complaint_row.add(test1, text='test1')
+complaint_row.add(test2, text='test2')
+complaint_row.add(test3, text='test3')
+# test1.pack(expand=1, fill='both')
 
 # hasil_row = ttk.LabelFrame(frame, text='hasil')
 # hasil_row.grid(row=1, column=1, padx=20, pady=10)
-
-# hasil_row = ttk.LabelFrame(frame, text="Medical Complaints Row")
-# hasil_row.grid(row=1, column=1, padx=20, pady=10)
-
 
 name_entry = ttk.Entry(biodata_row)
 name_entry.insert(0, "Name")
@@ -149,55 +166,54 @@ name_entry.grid(row=0, column=0, padx=10, pady=(20, 20), sticky="ew")
 # tombol = ttk.Button(tab1, text='tekan buat hasil')
 # tombol.grid(row=1, column=0)
 
-
-label = ttk.Label(complaint_row, text='Air Pollution')
+label = ttk.Label(test1, text='Air Pollution')
 label.grid(row=0, column=0,)
-label = ttk.Label(complaint_row, text='Alcohol use')
+label = ttk.Label(test1, text='Alcohol use')
 label.grid(row=0, column=1)
-label = ttk.Label(complaint_row, text='Dust Allergy')
+label = ttk.Label(test1, text='Dust Allergy')
 label.grid(row=0, column=2)
-label = ttk.Label(complaint_row, text='OccuPational Hazards')
+label = ttk.Label(test1, text='OccuPational Hazards')
 label.grid(row=0, column=3)
 
-label = ttk.Label(complaint_row, text='Genetic Risk')
+label = ttk.Label(test1, text='Genetic Risk')
 label.grid(row=2, column=0)
-label = ttk.Label(complaint_row, text='Chronic Lung Disease')
+label = ttk.Label(test1, text='Chronic Lung Disease')
 label.grid(row=2, column=1)
-label = ttk.Label(complaint_row, text='Balanced Diet')
+label = ttk.Label(test1, text='Balanced Diet')
 label.grid(row=2, column=2)
-label = ttk.Label(complaint_row, text='Obesity')
+label = ttk.Label(test1, text='Obesity')
 label.grid(row=2, column=3)
 
-label = ttk.Label(complaint_row, text='Smoking')
+label = ttk.Label(test2, text='Smoking')
 label.grid(row=4, column=0)
-label = ttk.Label(complaint_row, text='Passive Smoker')
+label = ttk.Label(test2, text='Passive Smoker')
 label.grid(row=4, column=1)
-label = ttk.Label(complaint_row, text='Chest Pain')
+label = ttk.Label(test2, text='Chest Pain')
 label.grid(row=4, column=2)
-label = ttk.Label(complaint_row, text='Coughing of Blood')
+label = ttk.Label(test2, text='Coughing of Blood')
 label.grid(row=4, column=3)
 
-label = ttk.Label(complaint_row, text='Fatigue')
+label = ttk.Label(test2, text='Fatigue')
 label.grid(row=6, column=0)
-label = ttk.Label(complaint_row, text='Weight Loss')
+label = ttk.Label(test2, text='Weight Loss')
 label.grid(row=6, column=1)
-label = ttk.Label(complaint_row, text='Shortness of Breath')
+label = ttk.Label(test2, text='Shortness of Breath')
 label.grid(row=6, column=2)
-label = ttk.Label(complaint_row, text='Wheezing')
+label = ttk.Label(test2, text='Wheezing')
 label.grid(row=6, column=3)
 
-label = ttk.Label(complaint_row, text='Swallowing DIfficulty')
+label = ttk.Label(test3, text='Swallowing DIfficulty')
 label.grid(row=8, column=0)
-label = ttk.Label(complaint_row, text='Clubbing of Finger Nails')
+label = ttk.Label(test3, text='Clubbing of Finger Nails')
 label.grid(row=8, column=1)
-label = ttk.Label(complaint_row, text='Frequent Cold')
+label = ttk.Label(test3, text='Frequent Cold')
 label.grid(row=8, column=2)
-label = ttk.Label(complaint_row, text='Dry Cough')
+label = ttk.Label(test3, text='Dry Cough')
 label.grid(row=8, column=3)
 
-label = ttk.Label(complaint_row, text='Snoring')
+label = ttk.Label(test3, text='Snoring')
 label.grid(row=10, column=1, columnspan=2)
-# label = ttk.Label(complaint_row, text='Genetic Risk')
+# label = ttk.Label(test1, text='Genetic Risk')
 # label.grid(row=15, column=1)
 
 alamat_entry = ttk.Entry(biodata_row)
@@ -216,111 +232,124 @@ age_spinbox.grid(row=0, column=1, padx=10, pady=5, sticky="ew")
 
 ######### segment combo cox#############
 status_combobox = ttk.Combobox(
-    complaint_row, state='readonly', values=combo_list, width=10)
+    test1, state='readonly', values=combo_list, width=10)
 status_combobox.current(0)
 status_combobox.grid(row=1, column=0, padx=10, pady=5, sticky="ew")
 
 status_combobox = ttk.Combobox(
-    complaint_row, state='readonly', values=combo_list, width=10)
+    test1, state='readonly', values=combo_list, width=10)
 status_combobox.current(0)
 status_combobox.grid(row=1, column=1, padx=10, pady=5, sticky="ew")
 
 status_combobox = ttk.Combobox(
-    complaint_row, state='readonly', values=combo_list, width=10)
+    test1, state='readonly', values=combo_list, width=10)
 status_combobox.current(0)
 status_combobox.grid(row=1, column=2, padx=10, pady=5, sticky="ew")
 
 status_combobox = ttk.Combobox(
-    complaint_row, state='readonly', values=combo_list, width=10)
+    test1, state='readonly', values=combo_list, width=10)
 status_combobox.current(0)
 status_combobox.grid(row=1, column=3, padx=10, pady=5, sticky="ew")
 
 status_combobox = ttk.Combobox(
-    complaint_row, state='readonly', values=combo_list, width=10)
+    test1, state='readonly', values=combo_list, width=10)
 status_combobox.current(0)
 status_combobox.grid(row=3, column=0, padx=10, pady=5, sticky="ew")
 
 status_combobox = ttk.Combobox(
-    complaint_row, state='readonly', values=combo_list, width=10)
+    test1, state='readonly', values=combo_list, width=10)
 status_combobox.current(0)
 status_combobox.grid(row=3, column=1, padx=10, pady=5, sticky="ew")
 
 status_combobox = ttk.Combobox(
-    complaint_row, state='readonly', values=combo_list, width=10)
+    test1, state='readonly', values=combo_list, width=10)
 status_combobox.current(0)
 status_combobox.grid(row=3, column=2, padx=10, pady=5, sticky="ew")
 
 status_combobox = ttk.Combobox(
-    complaint_row, state='readonly', values=combo_list, width=10)
+    test1, state='readonly', values=combo_list, width=10)
 status_combobox.current(0)
 status_combobox.grid(row=3, column=3, padx=10, pady=5, sticky="ew")
 
 status_combobox = ttk.Combobox(
-    complaint_row, state='readonly', values=combo_list, width=10)
+    test2, state='readonly', values=combo_list, width=10)
 status_combobox.current(0)
 status_combobox.grid(row=5, column=0, padx=10, pady=5, sticky="ew")
 
 status_combobox = ttk.Combobox(
-    complaint_row, state='readonly', values=combo_list, width=10)
+    test2, state='readonly', values=combo_list, width=10)
 status_combobox.current(0)
 status_combobox.grid(row=5, column=1, padx=10, pady=5, sticky="ew")
 
 status_combobox = ttk.Combobox(
-    complaint_row, state='readonly', values=combo_list, width=10)
+    test2, state='readonly', values=combo_list, width=10)
 status_combobox.current(0)
 status_combobox.grid(row=5, column=2, padx=10, pady=5, sticky="ew")
 
 status_combobox = ttk.Combobox(
-    complaint_row, state='readonly', values=combo_list, width=10)
+    test2, state='readonly', values=combo_list, width=10)
 status_combobox.current(0)
 status_combobox.grid(row=5, column=3, padx=10, pady=5, sticky="ew")
 
 status_combobox = ttk.Combobox(
-    complaint_row, state='readonly', values=combo_list, width=10)
+    test2, state='readonly', values=combo_list, width=10)
 status_combobox.current(0)
 status_combobox.grid(row=7, column=0, padx=10, pady=5, sticky="ew")
 
 status_combobox = ttk.Combobox(
-    complaint_row, state='readonly', values=combo_list, width=10)
+    test2, state='readonly', values=combo_list, width=10)
 status_combobox.current(0)
 status_combobox.grid(row=7, column=1, padx=10, pady=5, sticky="ew")
 
 status_combobox = ttk.Combobox(
-    complaint_row, state='readonly', values=combo_list, width=10)
+    test2, state='readonly', values=combo_list, width=10)
 status_combobox.current(0)
 status_combobox.grid(row=7, column=2, padx=10, pady=5, sticky="ew")
 
 status_combobox = ttk.Combobox(
-    complaint_row, state='readonly', values=combo_list, width=10)
+    test2, state='readonly', values=combo_list, width=10)
 status_combobox.current(0)
 status_combobox.grid(row=7, column=3, padx=10, pady=5, sticky="ew")
 
 status_combobox = ttk.Combobox(
-    complaint_row, state='readonly', values=combo_list, width=10)
+    test3, state='readonly', values=combo_list, width=10)
 status_combobox.current(0)
 status_combobox.grid(row=9, column=0, padx=10, pady=5, sticky="ew")
 
 status_combobox = ttk.Combobox(
-    complaint_row, state='readonly', values=combo_list, width=10)
+    test3, state='readonly', values=combo_list, width=10)
 status_combobox.current(0)
 status_combobox.grid(row=9, column=1, padx=10, pady=5, sticky="ew")
 
 status_combobox = ttk.Combobox(
-    complaint_row, state='readonly', values=combo_list, width=10)
+    test3, state='readonly', values=combo_list, width=10)
 status_combobox.current(0)
 status_combobox.grid(row=9, column=2, padx=10, pady=5, sticky="ew")
 
 status_combobox = ttk.Combobox(
-    complaint_row, state='readonly', values=combo_list, width=10)
+    test3, state='readonly', values=combo_list, width=10)
 status_combobox.current(0)
 status_combobox.grid(row=9, column=3, padx=10, pady=5, sticky="ew")
 
 status_combobox = ttk.Combobox(
-    complaint_row, state='readonly', values=combo_list, width=10)
+    test3, state='readonly', values=combo_list, width=10)
 status_combobox.current(0)
 status_combobox.grid(row=11, column=1, columnspan=2,
                      padx=10, pady=5, sticky="ew")
+progress = ttk.Progressbar(tab1, orient="horizontal",
+                           length=200, mode="determinate")
+progress.pack(pady=50)
 
+
+def start():
+    progress["value"] = 0
+    progress["maximum"] = 100
+    while progress["value"] < progress["maximum"]:
+        progress["value"] += 1
+
+
+button = tk.Button(tab1, text="Start", command=start)
+button.pack()
 
 a = tk.BooleanVar()
 checkbutton = ttk.Checkbutton(
@@ -330,8 +359,8 @@ checkbutton.grid(row=6, column=0, padx=5, pady=5, sticky="nsew")
 # checkbutton = ttk.Checkbutton(biodata_row, text="Employed", variable=a)
 # checkbutton.grid(row=7, column=2, padx=10, pady=10, sticky="nsew")
 
-button = ttk.Button(biodata_row, text="Insert", command=insert_row)
-button.grid(row=8, column=0, padx=5, pady=5, sticky="nsew")
+# button = ttk.Button(biodata_row, text="Insert", command=insert_row)
+# button.grid(row=8, column=0, padx=5, pady=5, sticky="nsew")
 
 separator = ttk.Separator(biodata_row)
 separator.grid(row=9, column=0, padx=(20, 10), pady=10, sticky="ew")
@@ -358,8 +387,11 @@ treeview.column('Age', width=50)
 treeview.column('Gender', width=50)
 treeview.column('Level', width=50)
 
+treeview.bind("<Double-1>", on_click)
+
 treeview.pack()
 treeScroll.config(command=treeview.yview)
+
 load_data()
 
 root.update()
