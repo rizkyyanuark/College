@@ -1,17 +1,24 @@
-import tkinter as tk
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from matplotlib.figure import Figure
+from openpyxl import Workbook
+from openpyxl.drawing.image import Image
+from tkinter import *
+from PIL import ImageTk, Image
 
-root = tk.Tk()
+root = Tk()
+root.title("Gambar di GUI")
 
-fig = Figure(figsize=(5, 4), dpi=100)
-t = [0, 1, 2, 3, 4]
-s = [0, 1, 4, 9, 16]
-ax = fig.add_subplot(111)
-ax.plot(t, s)
+wb = Workbook()
+ws = wb.active
 
-canvas = FigureCanvasTkAgg(fig, master=root)  # A tk.DrawingArea.
-canvas.draw()
-canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
+img = Image('Picture2.png')
+ws.add_image(img, 'A1')
 
-tk.mainloop()
+wb.save('example.xlsx')
+
+img = Image.open('Picture2.png')
+img = img.resize((250, 250), Image.ANTIALIAS)
+
+img = ImageTk.PhotoImage(img)
+panel = Label(root, image=img)
+panel.pack(side="bottom", fill="both", expand="yes")
+
+root.mainloop()

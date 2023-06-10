@@ -1,36 +1,44 @@
-from tkinter import *
-from tkinter.ttk import *
+import tkinter as tk
+import pandas as pd
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.figure import Figure
+import matplotlib.pyplot as plt
 
 
-def bar():
-    import time
-    for i in range(1, 101, 1):
-        progress['value'] = i
-        root.update_idletasks()
-        lb.config(text=str(i)+"%")
-        time.sleep(0.03)
+def update_chart():
+    # hapus chart lama
+    ax2.clear()
+    # buat chart baru dengan data terbaru
+    df = pd.read_excel('data.xlsx')
+    gender_counts = df['Jenis Kelamin'].value_counts()
+    labels = gender_counts.index
+    sizes = gender_counts.values
+    ax2.pie(sizes, labels=labels, autopct='%1.1f%%',
+            startangle=90)
+    # refresh tampilan chart
+    canvas.draw()
 
-    progress['value'] = 100
-    root.destroy()
+
+df = pd.read_excel('data.xlsx')
+gender_counts = df['Jenis Kelamin'].value_counts()
+plt.style.use('default')
+plt.rcParams["axes.prop_cycle"] = plt.cycler(
+    color=['#9CA777', '#64C2A6', '#AADEA7'])
+
+fig2, ax2 = plt.subplots()
+ax2.pie(gender_counts.values, labels=gender_counts.index,
+        autopct='%1.1f%%', startangle=90)
+ax2.axis('equal')
+
+root = tk.Tk()
+canvas = FigureCanvasTkAgg(fig2, master=root)
+canvas.draw()
+canvas.get_tk_widget().pack()
+
+button = tk.Button(root, text="Refresh", command=update_chart)
+button.pack()
+
+tk.mainloop()
 
 
-root = Tk()
 
-f1 = "arial 15 bold"
-lb = Label(root, text="", font=f1)
-lb.pack(padx=80)
-
-s = Style()
-s.configure("TProgressbar", foreground='#09BF14',
-            background='#09BF14', thickness=100)
-
-progress = Progressbar(root, style="TProgressbar",
-                       length=700, mode='determinate')
-progress.pack(pady=10, padx=5)
-
-btn = Button(root, text='Start', command=bar)
-btn.pack(pady=10)
-
-root.geometry("710x150+200+200")
-root.title("progress")
-mainloop()

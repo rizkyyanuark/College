@@ -72,11 +72,11 @@ def knn():
     print(train[0])
 
 
-def toggle_mode():
-    if mode_switch.instate(["selected"]):
-        style.theme_use("forest-light")
-    else:
-        style.theme_use("forest-dark")
+# def toggle_mode():
+#     if mode_switch.instate(["selected"]):
+#         style.theme_use("forest-light")
+#     else:
+#         style.theme_use("forest-dark")
 
 
 def on_click(event):
@@ -123,10 +123,10 @@ root.columnconfigure(index=1, weight=1)
 root.rowconfigure(index=0, weight=1)
 root.rowconfigure(index=1, weight=1)
 
-style = ttk.Style(root)
-root.tk.call("source", "forest-dark.tcl")
-root.tk.call("source", "forest-light.tcl")
-style.theme_use("forest-dark")
+# style = ttk.Style(root)
+# root.tk.call("source", "forest-dark.tcl")
+# root.tk.call("source", "forest-light.tcl")
+# style.theme_use("forest-dark")
 
 combo_list = ["Very Low", "low", "Below Average", 'Average',
               'Above Average', 'High', 'Very High', "Maximum", 'Peak']
@@ -390,9 +390,9 @@ button.pack(pady=10)
 separator = ttk.Separator(biodata_row)
 separator.grid(row=9, column=0, padx=(20, 10), pady=10, sticky="ew")
 
-mode_switch = ttk.Checkbutton(
-    biodata_row, text="Mode", style="Switch", command=toggle_mode)
-mode_switch.grid(row=10, column=0, padx=5, pady=10, sticky="nsew")
+# mode_switch = ttk.Checkbutton(
+#     biodata_row, text="Mode", style="Switch", command=toggle_mode)
+# mode_switch.grid(row=10, column=0, padx=5, pady=10, sticky="nsew")
 
 treeFrame = ttk.Frame(frame)
 treeFrame.grid(row=0, column=1, pady=10)

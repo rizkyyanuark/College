@@ -33,8 +33,14 @@ style.theme_use("forest-dark")
 
 # Create lists for the Comboboxes
 option_menu_list = ["", "OptionMenu", "Option 1", "Option 2"]
-combo_list = ["Combobox", "Editable item 1", "Editable item 2"]
-readonly_combo_list = ["Readonly combobox", "Item 1", "Item 2"]
+combo_list = ["Combobox", "Editable item 1", "Editable item 2", 1]
+readonly_combo_list = ["Readonly combobox", "Item 1", "Item 2", 1]
+
+
+def test():
+    combobox.set(int(combobox.get()))
+    print(type(combobox.get()))
+
 
 # Create control variables
 a = tk.BooleanVar()
@@ -126,7 +132,7 @@ optionmenu = ttk.OptionMenu(widgets_frame, e, *option_menu_list)
 optionmenu.grid(row=5, column=0, padx=5, pady=10, sticky="nsew")
 
 # Button
-button = ttk.Button(widgets_frame, text="Button")
+button = ttk.Button(widgets_frame, text="Button", command=test)
 button.grid(row=6, column=0, padx=5, pady=10, sticky="nsew")
 
 # Accentbutton

@@ -14,7 +14,7 @@ ax1.set_title("Sales by Product")
 ax1.set_xlabel("Product")
 ax1.set_ylabel("Sales")
 # plt.show()
-
+  
 # Chart 2: Horizontal bar chart of inventory data
 fig2, ax2 = plt.subplots()
 ax2.barh(list(inventory_data.keys()), inventory_data.values())
