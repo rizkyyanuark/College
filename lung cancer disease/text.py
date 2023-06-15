@@ -369,29 +369,33 @@ class App():
         treeScroll2 = ttk.Scrollbar(treeFrame2)
         treeScroll2.pack(side="right", fill="y")
 
-        cols = ("Time", "Name", "Age", "Gender", "Level")
+        cols = ("Time", 'Day', "Name", "Age", "Gender", "Level")
         self.treeview = ttk.Treeview(treeFrame, show="headings",
                                      yscrollcommand=treeScroll.set, columns=cols, height=13)
         self.treeview2 = ttk.Treeview(treeFrame2, show="headings",
                                       yscrollcommand=treeScroll.set, columns=cols, height=13)
 
         self.treeview.heading('#1', text='Level')
-        self.treeview.heading('#2', text='Time')
-        self.treeview.heading('#3', text='Name')
-        self.treeview.heading('#4', text='Age')
-        self.treeview.heading('#5', text='Gender')
+        self.treeview.heading('#2', text='Day')
+        self.treeview.heading('#3', text='Time')
+        self.treeview.heading('#4', text='Name')
+        self.treeview.heading('#5', text='Age')
+        self.treeview.heading('#6', text='Gender')
         self.treeview.column('Level', width=50)
+        self.treeview.column('Day', width=50)
         self.treeview.column('Time', width=70)
         self.treeview.column('Name', width=50)
         self.treeview.column('Age', width=50)
         self.treeview.column('Gender', width=50)
 
         self.treeview2.heading('#1', text='Level')
-        self.treeview2.heading('#2', text='Time')
-        self.treeview2.heading('#3', text='Name')
-        self.treeview2.heading('#4', text='Age')
-        self.treeview2.heading('#5', text='Gender')
+        self.treeview2.heading('#2', text='Day')
+        self.treeview2.heading('#3', text='Time')
+        self.treeview2.heading('#4', text='Name')
+        self.treeview2.heading('#5', text='Age')
+        self.treeview2.heading('#6', text='Gender')
         self.treeview2.column('Level', width=50)
+        self.treeview2.column('Day', width=50)
         self.treeview2.column('Time', width=50)
         self.treeview2.column('Name', width=50)
         self.treeview2.column('Age', width=50)
@@ -721,12 +725,12 @@ class App():
         n = len(df)
         for i in range(n):
             for j in range(0, n-i-1):
-                if self.order[df.iloc[j]['Level']] > self.order[df.iloc[j+1]['Level']]:
+                if (self.order[df.iloc[j]['Level']] > self.order[df.iloc[j+1]['Level']]) or (self.order[df.iloc[j]['Level']] == self.order[df.iloc[j+1]['Level']] and df.iloc[j]['Hari'] > df.iloc[j+1]['Hari']) or (self.order[df.iloc[j]['Level']] == self.order[df.iloc[j+1]['Level']] and df.iloc[j]['Hari'] == df.iloc[j+1]['Hari'] and df.iloc[j]['Waktu'] > df.iloc[j+1]['Waktu']):
                     df.iloc[j], df.iloc[j+1] = df.iloc[j+1], df.iloc[j]
 
         q = queue.PriorityQueue()
         for index, row in df.iterrows():
-            q.put((self.order[row['Level']], row['Waktu'],
+            q.put((self.order[row['Level']], row['Hari'], row['Waktu'],
                   row['Nama Pasien'], row['Umur'], row['Jenis Kelamin']))
 
         for i in self.treeview.get_children():
