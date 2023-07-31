@@ -11,13 +11,9 @@ import pandas as pd
 import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import KFold
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import precision_score
-from sklearn.metrics import recall_score
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import queue
-import heapq
 from tkinter import messagebox
 
 
@@ -28,9 +24,7 @@ class App():
     def __init__(self, master):
         self.window = master
         self.window.title("Lung Cancer Diasese")
-        # self.window.geometry("1200x1000")
         self.window.resizable(False, False)
-        # self.window.state('zoomed')
         self.icon = ImageTk.PhotoImage(Image.open("Picture3.png"))
         self.window.iconphoto(False, self.icon)
         self.font = Font(bold=True)
@@ -46,7 +40,7 @@ class App():
         else:
             self.file = Workbook()
             sheet = self.file.active
-            headers = ['Hari', 'Nama Pasien', 'Umur', 'Jenis Kelamin',
+            headers = ['Hari', 'Waktu', 'Nama Pasien', 'Umur', 'Jenis Kelamin',
                        'Nomer Telepon', 'Alamat', 'Jaminan Kesehatan',
                        'Air Pollution', 'Alcohol use', 'Dust Allergy', 'Occupational Hazards',
                        'Genetic Risk', 'Chronic Lung Disease', 'Balanced Diet', 'Obesity', 'Smoking ',
@@ -77,7 +71,6 @@ class App():
 
         self.combo_list7 = ["Very Low", "Low", 'Average',
                             'Above Average', 'High', 'Very High', "Maximum"]
-        self.hasiltrain = ""
         self.d = tk.IntVar(value=2)
         self.h = tk.IntVar(value=2)
 
@@ -96,6 +89,12 @@ class App():
 
         self.frame2 = ttk.Frame(self.tab2)
         self.frame2.pack()
+
+        self.frame3 = ttk.Frame(self.tab2)
+        self.frame3.pack()
+
+        self.frame4 = ttk.Frame(self.tab2)
+        self.frame4.pack()
 
         self.biodata_row = ttk.LabelFrame(self.frame, text="Biodata Row")
         self.biodata_row.grid(row=0, column=0, padx=20, pady=10)
@@ -117,7 +116,10 @@ class App():
             self.bpjs_row, text="Female", variable=self.h, value=2)
         radio_4.grid(row=1, column=1, padx=5, pady=10, sticky="nsew")
 
-        complaint_row = ttk.Notebook(self.frame)
+        self.biodata_row1 = ttk.LabelFrame(self.frame, text="Keluhan Row")
+        self.biodata_row1.grid(row=1, column=0, padx=20, pady=10)
+
+        complaint_row = ttk.Notebook(self.biodata_row1)
         complaint_row.grid(row=1, column=0, padx=20, pady=10)
         test1 = ttk.Frame(complaint_row)
         test2 = ttk.Frame(complaint_row)
@@ -131,7 +133,7 @@ class App():
             "<FocusIn>", lambda e: self.name_entry.delete('0', 'end'))
         self.name_entry.grid(row=0, column=0, padx=10,
                              pady=(20, 20), sticky="ew")
-        self.save_button = ttk.Button(test3, text="Save to Train",
+        self.save_button = ttk.Button(test3, text="Save to Predict",
                                       style="Accent.TButton", command=self.knn)
         self.save_button.grid(row=4, column=2, columnspan=2,
                               padx=10, pady=20, sticky="ew")
@@ -329,9 +331,6 @@ class App():
         self.snoring_combobox.current(0)
         self.snoring_combobox.grid(row=3, column=1, columnspan=2,
                                    padx=15, pady=5, sticky="ew")
-        # progress = ttk.Progressbar(self.tab1, orient="horizontal",
-        #                            length=200, mode="determinate")
-        # progress.pack(pady=50)
 
         self.a = tk.BooleanVar()
         checkbutton = ttk.Checkbutton(
@@ -366,10 +365,17 @@ class App():
             self.bg1 = '#313131'
             self.bg2 = '#313131'
 
-        treeFrame = ttk.Frame(self.frame)
+        self.biodata_row3 = ttk.LabelFrame(self.frame, text="Antrian")
+        self.biodata_row3.grid(row=0, column=1, padx=20, pady=10)
+
+        treeFrame = ttk.Frame(self.biodata_row3)
         treeFrame.grid(row=0, column=1, pady=10)
 
-        treeFrame2 = ttk.Frame(self.frame)
+        self.biodata_row4 = ttk.LabelFrame(
+            self.frame, text="Antrian Sudah dilayani")
+        self.biodata_row4.grid(row=1, column=1, padx=20, pady=10)
+
+        treeFrame2 = ttk.Frame(self.biodata_row4)
         treeFrame2.grid(row=1, column=1, pady=10)
 
         treeScroll = ttk.Scrollbar(treeFrame)
@@ -378,7 +384,7 @@ class App():
         treeScroll2 = ttk.Scrollbar(treeFrame2)
         treeScroll2.pack(side="right", fill="y")
 
-        cols = ("Day", "Name", "Age", "Gender", "Level")
+        cols = ("Time", 'Day', "Name", "Age", "Gender", "Level")
         self.treeview = ttk.Treeview(treeFrame, show="headings",
                                      yscrollcommand=treeScroll.set, columns=cols, height=13)
         self.treeview2 = ttk.Treeview(treeFrame2, show="headings",
@@ -386,22 +392,26 @@ class App():
 
         self.treeview.heading('#1', text='Level')
         self.treeview.heading('#2', text='Day')
-        self.treeview.heading('#3', text='Name')
-        self.treeview.heading('#4', text='Age')
-        self.treeview.heading('#5', text='Gender')
+        self.treeview.heading('#3', text='Time')
+        self.treeview.heading('#4', text='Name')
+        self.treeview.heading('#5', text='Age')
+        self.treeview.heading('#6', text='Gender')
         self.treeview.column('Level', width=50)
         self.treeview.column('Day', width=50)
+        self.treeview.column('Time', width=70)
         self.treeview.column('Name', width=50)
         self.treeview.column('Age', width=50)
         self.treeview.column('Gender', width=50)
 
         self.treeview2.heading('#1', text='Level')
         self.treeview2.heading('#2', text='Day')
-        self.treeview2.heading('#3', text='Name')
-        self.treeview2.heading('#4', text='Age')
-        self.treeview2.heading('#5', text='Gender')
+        self.treeview2.heading('#3', text='Time')
+        self.treeview2.heading('#4', text='Name')
+        self.treeview2.heading('#5', text='Age')
+        self.treeview2.heading('#6', text='Gender')
         self.treeview2.column('Level', width=50)
         self.treeview2.column('Day', width=50)
+        self.treeview2.column('Time', width=50)
         self.treeview2.column('Name', width=50)
         self.treeview2.column('Age', width=50)
         self.treeview2.column('Gender', width=50)
@@ -442,7 +452,7 @@ class App():
         self.total_categori = nilai_counts
         self.ax2.pie(sizes, labels=labels, autopct='%1.1f%%',
                      startangle=90)
-        self.ax2.set_title("Product \nBreakdown")
+        self.ax2.set_title("Berdasarkan \nJenis Kelamin")
         self.ax1.bar(
             self.total_categori.keys(), self.total_categori)
 
@@ -457,7 +467,7 @@ class App():
 
     def on_button_click(self):
         answer = messagebox.askquestion(
-            "Konfirmasi", "Apakah sudah dilayani?")
+            "Konfirmasi", "Konfirmasi untuk melanjutkan?")
         if answer == 'yes':
             self.insert_row()
 
@@ -484,6 +494,7 @@ class App():
             return
         self.now = datetime.now()
         self.tanggal = self.now.strftime("%d %B %Y")
+        self.time_string = self.now.strftime('%H:%M:%S')
         self.name = self.name_entry.get()
         self.age = int(self.age_spinbox.get())
         self.addres = self.alamat_entry.get()
@@ -505,7 +516,7 @@ class App():
         path = self.file
         workbook = openpyxl.load_workbook(path)
         sheet = workbook.active
-        row_values = [self.tanggal, self.name,
+        row_values = [self.tanggal, self.time_string, self.name,
                       self.age, self.gender, self.phone, self.addres, self.bpjs, self.airpollution_combobox.get(), self.alcoholuse_combobox.get(), self.dustalergy_combobox.get(), self.occupationalhazard_combobox.get(
                       ), self.geneticrisk_combobox.get(), self.croniclung_combobox.get(), self.balanceddiet_combobox.get(), self.obesity_combobox.get(), self.smoking_combobox.get(), self.passivesmoker_combobox.get(),
                       self.chestpain_combobox.get(), self.coughingofblood_combobox.get(), self.fatigue_combobox.get(), self.weightloss_combobox.get(), self.shortnessofbreath_combobox.get(), self.wheezing_combobox.get(), self.swallowingdiffi_combobox.get(), self.clubbing_combobox.get(), self.frequentcold_combobox.get(), self.drycough_combobox.get(), self.snoring_combobox.get(), train]
@@ -584,12 +595,6 @@ class App():
         self.fig2.patch.set_facecolor(self.bg1)
         self.ax2.patch.set_facecolor(self.bg2)
 
-        # upper_frame = tk.Frame(self.frame2)
-        # upper_frame.grid(row=0, column=0)
-
-        # lower_frame = tk.Frame(self.frame2)
-        # lower_frame.grid(row=1, column=0)
-
         self.canvas1 = FigureCanvasTkAgg(self.fig1, self.frame2)
         self.canvas1.draw()
         self.canvas1.get_tk_widget().grid(row=1, column=0)
@@ -624,9 +629,7 @@ class App():
             messagebox.showwarning(
                 "Warning", "isi lengkap Biodata row")
             return
-        elif self.hasiltrain == '':
-            messagebox.showwarning(
-                "Warning", "isi lengkap Biodata row")
+
         age = int(self.age_spinbox.get())
         gender = int(self.h.get())
         s = pd.read_csv('cancer patient data sets.csv')
@@ -698,10 +701,7 @@ class App():
               int(self.snoring_combobox.get())]])
 
         self.hasiltrain = train[0]
-        # img = ImageTk.PhotoImage(Image.open("Picture2.png"))
         messagebox.showinfo("Prediksi Level cancer", self.hasiltrain)
-        # hasil_prediksi = ttk.Label(self.frame, text=self.hasiltrain)
-        # hasil_prediksi.grid(row=2, column=2)
 
     def toggle_mode(self):
         if self.mode_switch.instate(["selected"]):
@@ -735,12 +735,18 @@ class App():
     def priority_queue(self):
         df = pd.read_excel("data.xlsx")
         self.order = {'Low': 2, 'Medium': 1, 'High': 0}
-        df_sorted = df.sort_values(by='Level', key=lambda x: x.map(self.order))
-        q = queue.PriorityQueue()
 
-        for index, row in df_sorted.iterrows():
-            q.put((self.order[row['Level']], row['Hari'],
-                   row['Nama Pasien'], row['Umur'], row['Jenis Kelamin']))
+        # Bubble sort
+        n = len(df)
+        for i in range(n):
+            for j in range(0, n-i-1):
+                if (self.order[df.iloc[j]['Level']] > self.order[df.iloc[j+1]['Level']]) or (self.order[df.iloc[j]['Level']] == self.order[df.iloc[j+1]['Level']] and df.iloc[j]['Hari'] > df.iloc[j+1]['Hari']) or (self.order[df.iloc[j]['Level']] == self.order[df.iloc[j+1]['Level']] and df.iloc[j]['Hari'] == df.iloc[j+1]['Hari'] and df.iloc[j]['Waktu'] > df.iloc[j+1]['Waktu']):
+                    df.iloc[j], df.iloc[j+1] = df.iloc[j+1], df.iloc[j]
+
+        q = queue.PriorityQueue()
+        for index, row in df.iterrows():
+            q.put((self.order[row['Level']], row['Hari'], row['Waktu'],
+                  row['Nama Pasien'], row['Umur'], row['Jenis Kelamin']))
 
         for i in self.treeview.get_children():
             self.treeview.delete(i)
