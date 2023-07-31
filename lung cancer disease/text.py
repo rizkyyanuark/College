@@ -14,7 +14,6 @@ from sklearn.model_selection import KFold
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import queue
-import heapq
 from tkinter import messagebox
 
 
@@ -91,6 +90,12 @@ class App():
         self.frame2 = ttk.Frame(self.tab2)
         self.frame2.pack()
 
+        self.frame3 = ttk.Frame(self.tab2)
+        self.frame3.pack()
+
+        self.frame4 = ttk.Frame(self.tab2)
+        self.frame4.pack()
+
         self.biodata_row = ttk.LabelFrame(self.frame, text="Biodata Row")
         self.biodata_row.grid(row=0, column=0, padx=20, pady=10)
 
@@ -111,7 +116,10 @@ class App():
             self.bpjs_row, text="Female", variable=self.h, value=2)
         radio_4.grid(row=1, column=1, padx=5, pady=10, sticky="nsew")
 
-        complaint_row = ttk.Notebook(self.frame)
+        self.biodata_row1 = ttk.LabelFrame(self.frame, text="Keluhan Row")
+        self.biodata_row1.grid(row=1, column=0, padx=20, pady=10)
+
+        complaint_row = ttk.Notebook(self.biodata_row1)
         complaint_row.grid(row=1, column=0, padx=20, pady=10)
         test1 = ttk.Frame(complaint_row)
         test2 = ttk.Frame(complaint_row)
@@ -125,7 +133,7 @@ class App():
             "<FocusIn>", lambda e: self.name_entry.delete('0', 'end'))
         self.name_entry.grid(row=0, column=0, padx=10,
                              pady=(20, 20), sticky="ew")
-        self.save_button = ttk.Button(test3, text="Save to Train",
+        self.save_button = ttk.Button(test3, text="Save to Predict",
                                       style="Accent.TButton", command=self.knn)
         self.save_button.grid(row=4, column=2, columnspan=2,
                               padx=10, pady=20, sticky="ew")
@@ -357,10 +365,17 @@ class App():
             self.bg1 = '#313131'
             self.bg2 = '#313131'
 
-        treeFrame = ttk.Frame(self.frame)
+        self.biodata_row3 = ttk.LabelFrame(self.frame, text="Antrian")
+        self.biodata_row3.grid(row=0, column=1, padx=20, pady=10)
+
+        treeFrame = ttk.Frame(self.biodata_row3)
         treeFrame.grid(row=0, column=1, pady=10)
 
-        treeFrame2 = ttk.Frame(self.frame)
+        self.biodata_row4 = ttk.LabelFrame(
+            self.frame, text="Antrian Sudah dilayani")
+        self.biodata_row4.grid(row=1, column=1, padx=20, pady=10)
+
+        treeFrame2 = ttk.Frame(self.biodata_row4)
         treeFrame2.grid(row=1, column=1, pady=10)
 
         treeScroll = ttk.Scrollbar(treeFrame)
