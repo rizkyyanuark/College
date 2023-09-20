@@ -15,6 +15,7 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import queue
 from tkinter import messagebox
+import re
 
 
 root = tk.Tk()
@@ -25,7 +26,8 @@ class App():
         self.window = master
         self.window.title("Lung Cancer Diasese")
         self.window.resizable(False, False)
-        self.icon = ImageTk.PhotoImage(Image.open("Picture3.png"))
+        self.icon = ImageTk.PhotoImage(Image.open(
+            r"C:\Users\rizky\OneDrive\Dokumen\GitHub\test\testpython\lung cancer disease\projek sda sem 2\Picture3.png"))
         self.window.iconphoto(False, self.icon)
         self.font = Font(bold=True)
         self.border = Border(left=Side(border_style='thin', color='00000000'),
@@ -579,7 +581,7 @@ class App():
         self.ax2.pie(sizes, labels=labels, autopct='%1.1f%%',
                      startangle=90)
         self.ax2.axis('equal')
-        self.ax2.set_title("Product \nBreakdown")
+        self.ax2.set_title("Porsi Persentase \nBerdasarkan jenis kelamin")
 
         self.total_categori = nilai_counts
         self.fig1, self.ax1 = plt.subplots()
