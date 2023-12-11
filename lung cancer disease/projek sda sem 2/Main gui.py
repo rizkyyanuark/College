@@ -36,7 +36,8 @@ class App():
                              bottom=Side(border_style='thin', color='00000000'))
 
         self.alignment = Alignment(horizontal='center', vertical='center')
-        self.file = pathlib.Path('data.xlsx')
+        self.file = pathlib.Path(
+            r'C:\Users\rizky\OneDrive\Dokumen\GitHub\test\testpython\lung cancer disease\projek sda sem 2\data.xlsx')
         if self.file.exists():
             pass
         else:
@@ -58,11 +59,14 @@ class App():
                 cell.font = self.font
                 cell.border = self.border
                 cell.alignment = self.alignment
-            self.file.save('data.xlsx')
+            self.file.save(
+                r'C:\Users\rizky\OneDrive\Dokumen\GitHub\test\testpython\lung cancer disease\projek sda sem 2\data.xlsx')
 
         self.style = ttk.Style(self.window)
-        self.window.tk.call("source", "forest-dark.tcl")
-        self.window.tk.call("source", "forest-light.tcl")
+        self.window.tk.call(
+            "source", r"C:\Users\rizky\OneDrive\Dokumen\GitHub\test\testpython\lung cancer disease\projek sda sem 2\forest-dark.tcl")
+        self.window.tk.call(
+            "source", r"C:\Users\rizky\OneDrive\Dokumen\GitHub\test\testpython\lung cancer disease\projek sda sem 2\forest-light.tcl")
         self.style.theme_use("forest-dark")
 
         self.combo_list = ["Very Low", "Low", "Below Average", 'Average',
