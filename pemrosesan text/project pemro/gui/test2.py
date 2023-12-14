@@ -49,9 +49,9 @@ class App():
                 cell.alignment = self.alignment
             self.file.save('data.xlsx')
         self.loaded_vectorizer = joblib.load(
-            r'C:\Users\rizky\OneDrive\Dokumen\GitHub\test\testpython\pemrosesan text\project pemro\gui\bow_vectorizer.pkl')
+            r'C:\Users\rizky\OneDrive\Dokumen\GitHub\test\testpython\pemrosesan text\project pemro\gui\tfidf_vectorizer.pkl')
         self.loaded_model = joblib.load(
-            r'C:\Users\rizky\OneDrive\Dokumen\GitHub\test\testpython\pemrosesan text\project pemro\gui\linear1000_model.pkl')
+            r'C:\Users\rizky\OneDrive\Dokumen\GitHub\test\testpython\pemrosesan text\project pemro\gui\rbf1000_model.pkl')
 
         self.window = master
         self.window.title("Analisis Sentimen")
