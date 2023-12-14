@@ -51,7 +51,7 @@ class App():
         self.loaded_vectorizer = joblib.load(
             r'C:\Users\rizky\OneDrive\Dokumen\GitHub\test\testpython\pemrosesan text\project pemro\gui\tfidf_vectorizer.pkl')
         self.loaded_model = joblib.load(
-            r'C:\Users\rizky\OneDrive\Dokumen\GitHub\test\testpython\pemrosesan text\project pemro\gui\rbf1000_model.pkl')
+            r'C:\Users\rizky\OneDrive\Dokumen\GitHub\test\testpython\pemrosesan text\project pemro\gui\rbf100_model.pkl')
 
         self.window = master
         self.window.title("Analisis Sentimen")
