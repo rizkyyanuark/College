@@ -81,7 +81,8 @@ class App():
         self.frame2 = ttk.Frame(self.tab2)
 
         self.frame2.place(x=0, y=0, width=720, height=720)
-
+        self.progress = ttk.Progressbar(
+            self.frame2, length=150, mode='determinate')
         self.mode_switch = ttk.Checkbutton(
             self.frame, text="Mode", style="Switch", command=lambda: self.toggle_mode())
         self.mode_switch.place(x=580, y=15)
@@ -102,7 +103,14 @@ class App():
         separator.place(x=0, y=65, width=720, height=2)
         self.sentimen_button = ttk.Button(self.frame, text="Analis Sentimen",
                                           style="Accent.TButton", command=self.analyze_sentiment_speech)
-
+        bg_color = '#FFFFFF' if self.last_mode == "light" else '#313131'
+        gif_download = r"C:\Users\rizky\OneDrive\Dokumen\GitHub\test\testpython\pemrosesan text\project pemro\gui\download-folder-unscreen.gif"
+        gif_download = Image.open(gif_download)
+        self.sequence_download = itertools.cycle(ImageTk.PhotoImage(img.resize((50, 50)))
+                                                 for img in ImageSequence.Iterator(gif_download))
+        image_upload = next(self.sequence_download)
+        self.button = tk.Button(self.frame2, image=image_upload,
+                                command=self.save_file, bg=bg_color, borderwidth=0, highlightthickness=0)
         self.sentimen_button.place(x=280, y=600, width=150, height=50)
         font_style = tkFont.Font(family="Arial", size=25)
         label = ttk.Label(self.frame, text='Speech to Text', font=font_style)
@@ -158,6 +166,7 @@ class App():
             filetypes=[("Excel files", "*.xlsx"), ("CSV files", "*.csv")])
         if not self.path:  # Jika pengguna membatalkan dialog, keluar dari fungsi
             return
+        self.button.place_forget()
         self.alamat_file.delete('0', 'end')  # Clear the entry widget
         self.alamat_file.insert('0', self.path)
 
@@ -244,8 +253,7 @@ class App():
         workbook.save(path)
 
     def on_heading_click(self, col):
-        self.progress = ttk.Progressbar(
-            self.frame2, length=100, mode='determinate')
+        self.progress.pack()
         # Mendapatkan semua item di Treeview
         all_items = self.treeview.get_children()
         # Membuat DataFrame untuk menyimpan data dan hasil analisis sentimen
@@ -271,16 +279,8 @@ class App():
             self.treeview.delete(item)
         for row in self.df.itertuples():
             self.treeview.insert('', tk.END, values=row[1:])
-        bg_color = '#FFFFFF' if self.last_mode == "light" else '#313131'
-        gif_download = r"C:\Users\rizky\OneDrive\Dokumen\GitHub\test\testpython\pemrosesan text\project pemro\gui\download-folder-unscreen.gif"
-        gif_download = Image.open(gif_download)
-        sequence_download = itertools.cycle(ImageTk.PhotoImage(img.resize((50, 50)))
-                                            for img in ImageSequence.Iterator(gif_download))
-        image_upload = next(sequence_download)
-        self.button = tk.Button(self.frame2, image=image_upload,
-                                command=self.save_file, bg=bg_color, borderwidth=0, highlightthickness=0)
-        self.button.place(x=0, y=0, width=50, height=50)
-        self.update_button_image(self.button, sequence_download, 33)
+        self.button.place(x=10, y=5, width=50, height=50)
+        self.update_button_image(self.button, self.sequence_download, 33)
 
     def save_file(self):
         save_file_path = filedialog.asksaveasfilename(defaultextension=".xlsx", filetypes=[
@@ -328,24 +328,46 @@ class App():
                     cancellation_details.error_details))
 
     def analyze_sentiment_file(self, text):
+        # Mulai progress bar
+        self.progress['maximum'] = 100
+        self.progress['value'] = 0
+        self.frame2.update_idletasks()
+        time.sleep(0.1)
+
         # Lakukan preprocessing pada teks
         text = re.sub(r'[^a-zA-Z\s]', '', text, re.I | re.A)
         text = text.lower()
         stop_words = set(stopwords.words('indonesian'))
         text = ' '.join([word for word in text.split()
                         if word not in stop_words])
+
+        # Update progress bar setelah preprocessing
+        self.progress['value'] += 30
+        self.frame2.update_idletasks()
+        time.sleep(0.1)
+
+        # Assuming you're using Sastrawi for Indonesian stemming
+        stemmer = StemmerFactory().create_stemmer()
+        text = stemmer.stem(text)
+
         # Transform the cleaned text to the same format as the training data
         text_to_analyze_transformed = self.loaded_vectorizer.transform([text])
+
+        # Update progress bar setelah transformasi
+        self.progress['value'] += 30
+        self.frame2.update_idletasks()
+        time.sleep(0.1)
+
         # Muat model yang telah disimpan
         try:
-            self.progress.pack()
-            self.progress['maximum'] = 100
-            for i in range(100):
-                time.sleep(0.01)  # simulate time delay
-                self.progress['value'] = i  # increment progress bar
-                self.frame2.update_idletasks()  # force redraw of the progress bar
-                predicted_sentiment = self.loaded_model.predict(
-                    text_to_analyze_transformed)
+            predicted_sentiment = self.loaded_model.predict(
+                text_to_analyze_transformed)
+
+            # Update progress bar setelah prediksi
+            self.progress['value'] += 40
+            self.frame2.update_idletasks()
+            time.sleep(0.1)
+
             # Tentukan kelas berdasarkan hasil prediksi
             if predicted_sentiment[0] == 0:
                 self.sentiment_result = "negatif"
