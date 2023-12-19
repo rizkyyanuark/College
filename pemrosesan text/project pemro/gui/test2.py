@@ -20,6 +20,8 @@ from tkinter import filedialog
 import csv
 import pandas as pd
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
+from tqdm import tqdm
+import time
 nltk.download('stopwords')
 
 
@@ -38,7 +40,6 @@ class App():
             self.file = Workbook()
             sheet = self.file.active
             headers = ['Waktu', 'Text', 'Sentimen']
-
             for col_num, header in enumerate(headers, 1):
                 cell = sheet.cell(row=1, column=col_num)
                 cell.value = header
@@ -243,6 +244,8 @@ class App():
         workbook.save(path)
 
     def on_heading_click(self, col):
+        self.progress = ttk.Progressbar(
+            self.frame2, length=100, mode='determinate')
         # Mendapatkan semua item di Treeview
         all_items = self.treeview.get_children()
         # Membuat DataFrame untuk menyimpan data dan hasil analisis sentimen
@@ -331,20 +334,18 @@ class App():
         stop_words = set(stopwords.words('indonesian'))
         text = ' '.join([word for word in text.split()
                         if word not in stop_words])
-        # Assuming you're using Sastrawi for Indonesian stemming
-        # stemmer = StemmerFactory().create_stemmer()
-        # text = stemmer.stem(text)
-        # # 2. Remove short words: They might not contain useful information for sentiment analysis
-        # text = ' '.join([word for word in text.split() if len(word) > 2])
-
         # Transform the cleaned text to the same format as the training data
         text_to_analyze_transformed = self.loaded_vectorizer.transform([text])
-
         # Muat model yang telah disimpan
         try:
-            predicted_sentiment = self.loaded_model.predict(
-                text_to_analyze_transformed)
-
+            self.progress.pack()
+            self.progress['maximum'] = 100
+            for i in range(100):
+                time.sleep(0.01)  # simulate time delay
+                self.progress['value'] = i  # increment progress bar
+                self.frame2.update_idletasks()  # force redraw of the progress bar
+                predicted_sentiment = self.loaded_model.predict(
+                    text_to_analyze_transformed)
             # Tentukan kelas berdasarkan hasil prediksi
             if predicted_sentiment[0] == 0:
                 self.sentiment_result = "negatif"
@@ -372,7 +373,6 @@ class App():
         text = stemmer.stem(text)
         # Transform the cleaned text to the same format as the training data
         text_to_analyze_transformed = self.loaded_vectorizer.transform([text])
-
         # Muat model yang telah disimpan
         try:
             predicted_sentiment = self.loaded_model.predict(
