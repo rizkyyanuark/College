@@ -50,9 +50,9 @@ class App():
                 cell.alignment = self.alignment
             self.file.save('data.xlsx')
         self.loaded_vectorizer = joblib.load(
-            r'C:\Users\rizky\OneDrive\Dokumen\GitHub\test\testpython\pemrosesan text\project pemro\gui\tfidf_vectorizer.pkl')
+            r'C:\Users\rizky\OneDrive\Dokumen\GitHub\test\College\pemrosesan text\project pemro\gui\bow_vectorizer.pkl')
         self.loaded_model = joblib.load(
-            r'C:\Users\rizky\OneDrive\Dokumen\GitHub\test\testpython\pemrosesan text\project pemro\gui\rbf100_model.pkl')
+            r'C:\Users\rizky\OneDrive\Dokumen\GitHub\test\College\pemrosesan text\project pemro\gui\linear1_model.pkl')
 
         self.window = master
         self.window.title("Analisis Sentimen")
@@ -60,12 +60,12 @@ class App():
         self.window.geometry("720x720")
         self.style = ttk.Style(self.window)
         self.icon = ImageTk.PhotoImage(Image.open(
-            r"C:\Users\rizky\OneDrive\Dokumen\GitHub\test\testpython\pemrosesan text\project pemro\gui\mic.png"))
+            r"C:\Users\rizky\OneDrive\Dokumen\GitHub\test\College\pemrosesan text\project pemro\gui\mic.png"))
         self.window.iconphoto(False, self.icon)
         self.window.tk.call(
-            "source", r"C:\Users\rizky\OneDrive\Dokumen\GitHub\test\testpython\pemrosesan text\project pemro\gui\forest-dark.tcl")
+            "source", r"C:\Users\rizky\OneDrive\Dokumen\GitHub\test\College\pemrosesan text\project pemro\gui\forest-dark.tcl")
         self.window.tk.call(
-            "source", r"C:\Users\rizky\OneDrive\Dokumen\GitHub\test\testpython\pemrosesan text\project pemro\gui\forest-light.tcl")
+            "source", r"C:\Users\rizky\OneDrive\Dokumen\GitHub\test\College\pemrosesan text\project pemro\gui\forest-light.tcl")
         self.style.theme_use("forest-dark")
         self.notebook = ttk.Notebook(self.window)
         self.tab1 = ttk.Frame(self.notebook)
@@ -104,7 +104,7 @@ class App():
         self.sentimen_button = ttk.Button(self.frame, text="Analis Sentimen",
                                           style="Accent.TButton", command=self.analyze_sentiment_speech)
         bg_color = '#FFFFFF' if self.last_mode == "light" else '#313131'
-        gif_download = r"C:\Users\rizky\OneDrive\Dokumen\GitHub\test\testpython\pemrosesan text\project pemro\gui\download-folder-unscreen.gif"
+        gif_download = r"C:\Users\rizky\OneDrive\Dokumen\GitHub\test\College\pemrosesan text\project pemro\gui\download-folder-unscreen.gif"
         gif_download = Image.open(gif_download)
         self.sequence_download = itertools.cycle(ImageTk.PhotoImage(img.resize((50, 50)))
                                                  for img in ImageSequence.Iterator(gif_download))
@@ -115,7 +115,7 @@ class App():
         font_style = tkFont.Font(family="Arial", size=25)
         label = ttk.Label(self.frame, text='Speech to Text', font=font_style)
         label.place(x=10, y=5)
-        gif_trash_path = r"C:\Users\rizky\OneDrive\Dokumen\GitHub\test\testpython\pemrosesan text\project pemro\gui\trash-can-unscreen.gif"
+        gif_trash_path = r"C:\Users\rizky\OneDrive\Dokumen\GitHub\test\College\pemrosesan text\project pemro\gui\trash-can-unscreen.gif"
         gif_trash = Image.open(gif_trash_path)
         sequence_trash = itertools.cycle(ImageTk.PhotoImage(img.resize((100, 100)))
                                          for img in ImageSequence.Iterator(gif_trash))
@@ -124,7 +124,7 @@ class App():
             self.frame, command=self.clear_text, image=image_trash, borderwidth=0, highlightthickness=0, bg=bg1)
         self.clear_button.place(x=400, y=415)
         self.update_button_image(self.clear_button, sequence_trash, 33)
-        gif_mic_path = r"C:\Users\rizky\OneDrive\Dokumen\GitHub\test\testpython\pemrosesan text\project pemro\gui\microphone-unscreen.gif"
+        gif_mic_path = r"C:\Users\rizky\OneDrive\Dokumen\GitHub\test\College\pemrosesan text\project pemro\gui\microphone-unscreen.gif"
         gif_mic = Image.open(gif_mic_path)
         sequence_mic = itertools.cycle(ImageTk.PhotoImage(img.resize((100, 100)))
                                        for img in ImageSequence.Iterator(gif_mic))
@@ -133,7 +133,7 @@ class App():
             self.frame, command=self.recognize_speech, image=image_mic, borderwidth=0, highlightthickness=0, bg=bg1)
         self.start_button.place(x=200, y=415)
         self.update_button_image(self.start_button, sequence_mic, 33)
-        gif_upload = r"C:\Users\rizky\OneDrive\Dokumen\GitHub\test\testpython\pemrosesan text\project pemro\gui\upload2-unscreen.gif"
+        gif_upload = r"C:\Users\rizky\OneDrive\Dokumen\GitHub\test\College\pemrosesan text\project pemro\gui\upload2-unscreen.gif"
         gif_upload = Image.open(gif_upload)
         sequence_upload = itertools.cycle(ImageTk.PhotoImage(img.resize((50, 50)))
                                           for img in ImageSequence.Iterator(gif_upload))
