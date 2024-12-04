@@ -1,79 +1,113 @@
-Polisi,Ekonomi,Kesehatan,Teknologi,Infrastruktur,Pendidikan,Hukum,Sosial
-patroli,bisnis,dokter,komputer,jalan,sekolah,konstitusi,sosial
-penegak hukum,keuangan,rumah sakit,internet,jembatan,guru,peradilan,pengangguran
-kepolisian,pasar,obat,ponsel,bandara,pelajaran,hakim,ketidaksetaraan
-seragam,perdagangan,penyakit,aplikasi,pelabuhan,siswa,pengacara,diskriminasi
-lalu lintas,investasi,pencegahan,perangkat lunak,kereta api,universitas,undang-undang,kekerasan
-keamanan,laba,imunisasi,perangkat keras,listrik,ilmu pengetahuan,kebebasan,penindasan
-investigasi,rugi,nutrisi,jaringan,air bersih,belajar,perlindungan,ketidakadilan
-perlindungan,saham,olahraga,inovasi,telekomunikasi,buku,keadilan,ketidakberdayaan
-pengamanan,bursa,gizi,digital,transportasi,kurikulum,kesetaraan,keterbelakangan
-penyelidikan,manajemen,bangunan,elektronik,bangunan,nilai,martabat,ketergantungan
-pengawasan,suap,kebersihan,penipuan,instruksi,pengetahuan,penyalahgunaan wewenang,keterasingan
-penjagaan,pencucian uang,kebugaran,terobosan,instalasi,pengajaran,nepotisme,ketidakpercayaan
-penindakan,penggelapan,kesejahteraan,transformasi,inklusi,pembelajaran,kolusi,ketidakamanan
-pencegahan,penyelundupan,keselamatan,transmisi,inisiasi,penilaian,penyelewengan,ketidakstabilan
-pengaturan,peningkatan,kekuatan,transparansi,inovator,pengembangan,pengkongsian jahat,ketegangan
-pengendalian,investasi,kenyamanan,transportasi,insentif,perubahan,gratifikasi,konflik
-pemberantasan,penyuapan,keberlanjutan,tren,insinyur,pemikiran,mafia,perpecahan
-pembuktian,suap,keberhasilan,trik,inspektorat,pemberdayaan,pengekangan,permusuhan
-pencegahan,efisiensi,keberagaman,telekomunikasi,instalatur,penerapan,pidana,perang
-penyelidikan,elastisitas,penyakit,telematika,insurans,penelitian,penguasaan,kekacauan
-pengawasan,ekspansi,kematian,telepon,integrasi,pengalaman,institusi,berinteraksi
-operrasi kepolisian,ekspor,malnutrisi,televisi,gedung,peningkatan,penegakan,ketidakjujuran
-penahanan,emisi,kekurangan gizi,temuan,perkotaan,perencanaan,tuntutan,ketidakberdayaan
-pungli,energi,kelebihan berat badan,terapan,flyover,pemahaman,terpadu,ketidakpercayaan
-laporan,entitas,obesitas,terobosan,penerangan,pengaruh,penindakan,ketidakpedulian
-razia,era,penyakit menular,terintegrasi,irigasi,penyelenggaraan,inkubasi,ketidakpuasan
-suap,eskalasi,penyakit tidak menular,terkini,bendungan,penyempurnaan,pengadilan,ketidaktahuan
-menyelidiki,estimasi,penyakit kronis,download,proyek,intelektual,tuntutan,ketidakamanan
-pengungkap kejahatan,perdagangan gelap,penyakit mental,robot,fasilitas,mahasiswa,keputusan,ketidakstabilan
-aparat,kerugian,rumah sakit,handphone,gedung,sekolah,hukum,interaksi
-polisi,keserakahan,bpjs,tablet,rumah,siswa,kuasa,pejabat
-penjara,ketidaktransparanan,bencana,kominfo,masjid,rektor,bts,buzzer
-98,uang,musibah,komunikasi,renovasi,dekan,politisasi,aroma
-tangkap,serakah,sakit,informasi,gereja,guru,kader,klarifikasi
-ditangkap,mewah,kesehatan,foto,Infrastruktur,universitas,komisaris,rasis
-penangkapan,mevvah,,video,perusahaan,pendidikan,pengadilan,racist
-ditahan,birokrasi,,streaming,,,pasal,pemilu
-polisi,management,,nonton,,,lembaga,pesta
-diusut,dana,,tiktok,,,lantik,warga
-usut,bank,,instagram,,,demokrasi,masyarakat
-,uang,,youtube,,,kader,etika
-,bayar,,sosial media,,,nasional,kadrun
-,rejeki,,sosmed,,,kpk,pribumi
-,rezeki,,renovasi,,,politik,cukong
-,kas,,elektronik,,,koalisi,rakyat
-,bansos,,narasi,,,dewan,kaya
-,pajak,,berita,,,pejabat,negeri
-,duit,,whatsapp,,,jaksa,negara
-,pengadaan,,info grafis,,,gubernur,penduduk
-,anggaran,,infografis,,,rt,teman
-,juta,,teknologi,,,rw,modus
-,triliun,,,,,walikota,pendukung
-,miliar,,,,,bupati,rezim
-,milliar,,,,,menteri,rejim
-,puluhan,,,,,pancasila,
-,birokrator,,,,,persidangan,
-,payment,,,,,persidangan,
-,birokrat,,,,,sidang,
-,suap,,,,,kementrian,
-,cuap,,,,,nasional,
-,menipu,,,,,kuasa,
-,nipu,,,,,berkuasa,
-,penipu,,,,,dakwa,
-,meroket,,,,,presiden,
-,bayar,,,,,komisi,
-,rupiah,,,,,demokrat,
-,haji,,,,,legislatif,
-,umroh,,,,,komisi,
-,menilap,,,,,republik,
-,tilap,,,,,bendahara,
-,nilap,,,,,negara,
-,ekonomi,,,,,jabatan,
-,rekening,,,,,,
-,cuci uang,,,,,,
-,utang,,,,,,
-,biaya,,,,,,
-,ribu,,,,,,
-,ekonominya,,,,,,
+Ekonomi,Kesehatan,Teknologi,Infrastruktur,Pendidikan,Hukum,Sosial
+bisnis,dokter,komputer,jalan,sekolah,konstitusi,sosial
+keuangan,rumah sakit,internet,jembatan,guru,peradilan,pengangguran
+pasar,obat,ponsel,bandara,pelajaran,hakim,ketidaksetaraan
+perdagangan,penyakit,aplikasi,pelabuhan,siswa,pengacara,diskriminasi
+investasi,pencegahan,perangkat lunak,kereta api,universitas,undang-undang,kekerasan
+laba,imunisasi,perangkat keras,listrik,ilmu pengetahuan,kebebasan,penindasan
+rugi,nutrisi,jaringan,air bersih,belajar,perlindungan,ketidakadilan
+saham,olahraga,inovasi,telekomunikasi,buku,keadilan,ketidakberdayaan
+bursa,gizi,digital,transportasi,kurikulum,kesetaraan,keterbelakangan
+manajemen,bangunan,elektronik,bangunan,nilai,martabat,ketergantungan
+suap,kebersihan,penipuan,instruksi,pengetahuan,penyalahgunaan wewenang,keterasingan
+pencucian uang,kebugaran,terobosan,instalasi,pengajaran,nepotisme,ketidakpercayaan
+penggelapan,kesejahteraan,transformasi,inklusi,pembelajaran,kolusi,ketidakamanan
+penyelundupan,keselamatan,transmisi,inisiasi,penilaian,penyelewengan,ketidakstabilan
+peningkatan,kekuatan,transparansi,inovator,pengembangan,pengkongsian jahat,ketegangan
+investasi,kenyamanan,transportasi,insentif,perubahan,gratifikasi,konflik
+penyuapan,keberlanjutan,tren,insinyur,pemikiran,mafia,perpecahan
+suap,keberhasilan,trik,inspektorat,pemberdayaan,pengekangan,permusuhan
+efisiensi,keberagaman,telekomunikasi,instalatur,penerapan,pidana,perang
+elastisitas,penyakit,telematika,insurans,penelitian,penguasaan,kekacauan
+ekspansi,kematian,telepon,integrasi,pengalaman,institusi,berinteraksi
+ekspor,malnutrisi,televisi,gedung,peningkatan,penegakan,ketidakjujuran
+emisi,kekurangan gizi,temuan,perkotaan,perencanaan,tuntutan,ketidakberdayaan
+energi,kelebihan berat badan,terapan,flyover,pemahaman,terpadu,ketidakpercayaan
+entitas,obesitas,terobosan,penerangan,pengaruh,penindakan,ketidakpedulian
+era,penyakit menular,terintegrasi,irigasi,penyelenggaraan,inkubasi,ketidakpuasan
+eskalasi,penyakit tidak menular,terkini,bendungan,penyempurnaan,pengadilan,ketidaktahuan
+estimasi,penyakit kronis,download,proyek,intelektual,tuntutan,ketidakamanan
+perdagangan gelap,penyakit mental,robot,fasilitas,mahasiswa,keputusan,ketidakstabilan
+kerugian,rumah sakit,handphone,gedung,sekolah,hukum,interaksi
+keserakahan,bpjs,tablet,rumah,siswa,kuasa,pejabat
+ketidaktransparanan,bencana,kominfo,masjid,rektor,bts,buzzer
+uang,musibah,komunikasi,renovasi,dekan,politisasi,aroma
+serakah,sakit,informasi,gereja,guru,kader,klarifikasi
+mewah,kesehatan,foto,Infrastruktur,universitas,komisaris,rasis
+mevvah,,video,perusahaan,pendidikan,pengadilan,racist
+birokrasi,,streaming,,,pasal,pemilu
+management,,nonton,,,lembaga,pesta
+dana,,tiktok,,,lantik,warga
+bank,,instagram,,,demokrasi,masyarakat
+uang,,youtube,,,kader,etika
+bayar,,sosial media,,,nasional,kadrun
+rejeki,,sosmed,,,kpk,pribumi
+rezeki,,renovasi,,,politik,cukong
+kas,,elektronik,,,koalisi,rakyat
+bansos,,narasi,,,dewan,kaya
+pajak,,berita,,,pejabat,negeri
+duit,,whatsapp,,,jaksa,negara
+pengadaan,,info grafis,,,gubernur,penduduk
+anggaran,,infografis,,,rt,teman
+juta,,teknologi,,,rw,modus
+triliun,,,,,walikota,pendukung
+miliar,,,,,bupati,rezim
+milliar,,,,,menteri,rejim
+puluhan,,,,,pancasila,
+birokrator,,,,,persidangan,
+payment,,,,,persidangan,
+birokrat,,,,,sidang,
+suap,,,,,kementrian,
+cuap,,,,,nasional,
+menipu,,,,,kuasa,
+nipu,,,,,berkuasa,
+penipu,,,,,dakwa,
+meroket,,,,,presiden,
+bayar,,,,,komisi,
+rupiah,,,,,demokrat,
+haji,,,,,legislatif,
+umroh,,,,,komisi,
+menilap,,,,,republik,
+tilap,,,,,bendahara,
+nilap,,,,,negara,
+ekonomi,,,,,jabatan,
+rekening,,,,,patroli,
+cuci uang,,,,,penegak hukum,
+utang,,,,,kepolisian,
+biaya,,,,,seragam,
+ribu,,,,,lalu lintas,
+ekonominya,,,,,keamanan,
+,,,,,investigasi,
+,,,,,perlindungan,
+,,,,,pengamanan,
+,,,,,penyelidikan,
+,,,,,pengawasan,
+,,,,,penjagaan,
+,,,,,penindakan,
+,,,,,pencegahan,
+,,,,,pengaturan,
+,,,,,pengendalian,
+,,,,,pemberantasan,
+,,,,,pembuktian,
+,,,,,pencegahan,
+,,,,,penyelidikan,
+,,,,,pengawasan,
+,,,,,operrasi kepolisian,
+,,,,,penahanan,
+,,,,,pungli,
+,,,,,laporan,
+,,,,,razia,
+,,,,,suap,
+,,,,,menyelidiki,
+,,,,,pengungkap kejahatan,
+,,,,,aparat,
+,,,,,polisi,
+,,,,,penjara,
+,,,,,98,
+,,,,,tangkap,
+,,,,,ditangkap,
+,,,,,penangkapan,
+,,,,,ditahan,
+,,,,,polisi,
+,,,,,diusut,
+,,,,,usut,
