@@ -34,11 +34,11 @@ ketidaktransparanan,bencana,kominfo,masjid,rektor,bts,buzzer
 uang,musibah,komunikasi,renovasi,dekan,politisasi,aroma
 serakah,sakit,informasi,gereja,guru,kader,klarifikasi
 mewah,kesehatan,foto,Infrastruktur,universitas,komisaris,rasis
-mevvah,,video,perusahaan,pendidikan,pengadilan,racist
-birokrasi,,streaming,,,pasal,pemilu
-management,,nonton,,,lembaga,pesta
-dana,,tiktok,,,lantik,warga
-bank,,instagram,,,demokrasi,masyarakat
+mevvah,puskesmas,video,perusahaan,pendidikan,pengadilan,racist
+birokrasi,perawatan,streaming,mrt,perguruan tinggi ,pasal,pemilu
+management,klinik ,nonton,lrt,ruang kelas,lembaga,pesta
+dana,,tiktok,tol,,lantik,warga
+bank,,instagram,kereta cepat,,demokrasi,masyarakat
 uang,,youtube,,,kader,etika
 bayar,,sosial media,,,nasional,kadrun
 rejeki,,sosmed,,,kpk,pribumi
@@ -50,15 +50,15 @@ duit,,whatsapp,,,jaksa,negara
 pengadaan,,info grafis,,,gubernur,penduduk
 anggaran,,infografis,,,rt,teman
 juta,,teknologi,,,rw,modus
-triliun,,,,,walikota,pendukung
+triliun,,startup,,,walikota,pendukung
 miliar,,,,,bupati,rezim
 milliar,,,,,menteri,rejim
-puluhan,,,,,pancasila,
-birokrator,,,,,persidangan,
-payment,,,,,persidangan,
-birokrat,,,,,sidang,
-suap,,,,,kementrian,
-cuap,,,,,nasional,
+puluhan,,,,,pancasila,partai politik
+birokrator,,,,,persidangan,ormas
+payment,,,,,persidangan,organisasi masyarakat
+birokrat,,,,,sidang,bantuan 
+suap,,,,,kementrian,bansos
+cuap,,,,,nasional,diskriminasi
 menipu,,,,,kuasa,
 nipu,,,,,berkuasa,
 penipu,,,,,dakwa,
@@ -77,14 +77,14 @@ utang,,,,,kepolisian,
 biaya,,,,,seragam,
 ribu,,,,,lalu lintas,
 ekonominya,,,,,keamanan,
-,,,,,investigasi,
-,,,,,perlindungan,
-,,,,,pengamanan,
-,,,,,penyelidikan,
-,,,,,pengawasan,
-,,,,,penjagaan,
-,,,,,penindakan,
-,,,,,pencegahan,
+pajak,,,,,investigasi,
+pasar modal ,,,,,perlindungan,
+apbn,,,,,pengamanan,
+judol,,,,,penyelidikan,
+judi online,,,,,pengawasan,
+daya beli,,,,,penjagaan,
+harga pasar,,,,,penindakan,
+bayar,,,,,pencegahan,
 ,,,,,pengaturan,
 ,,,,,pengendalian,
 ,,,,,pemberantasan,
@@ -111,3 +111,8 @@ ekonominya,,,,,keamanan,
 ,,,,,polisi,
 ,,,,,diusut,
 ,,,,,usut,
+,,,,,alih tangan ,
+,,,,,pembunuhan,
+,,,,,intimidasi,
+,,,,,asn,
+,,,,,pegawai,
